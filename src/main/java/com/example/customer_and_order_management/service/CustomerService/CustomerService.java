@@ -46,7 +46,7 @@ public class CustomerService {
         existing.setEmail(updatedData.getEmail());
 
         if (!existing.getCpf().equals(updatedData.getCpf())) {
-            Optional<Customer> cpfOwner = customerRepository.FindByCpf(updatedData.getCpf());
+            Optional<Customer> cpfOwner = customerRepository.findByCpf(updatedData.getCpf());
             if (cpfOwner.isPresent()){
                 throw new IllegalArgumentException("CPF já registrado.");
             }
@@ -54,6 +54,11 @@ public class CustomerService {
         }
 
         return customerRepository.save(existing);
+    }
+
+    public void delete(Long id) {
+        Customer existing = findById(id);
+        customerRepository.delete(existing);
     }
 
     public void validate(Customer customer){
