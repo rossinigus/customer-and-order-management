@@ -14,7 +14,7 @@ public class Order {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "order_value", nullable = false)
     private BigDecimal value;
 
     @ManyToOne(fetch = FetchType.LAZY)

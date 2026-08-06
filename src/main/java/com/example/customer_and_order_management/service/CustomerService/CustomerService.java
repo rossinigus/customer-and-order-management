@@ -16,7 +16,10 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     private static final Pattern EMAIL_PATTERN =
-            Pattern.compile("^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$");
+            Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+
+    private static final Pattern CPF_PATTERN =
+            Pattern.compile("^\\d{11}$");
 
     public Customer create(Customer customer) {
         validate(customer);
@@ -62,8 +65,8 @@ public class CustomerService {
     }
 
     public void validate(Customer customer){
-        if (customer.getName() == null || customer.getName().isBlank()){
-            throw new IllegalArgumentException("Name id required.");
+        if (customer.getCpf() == null || !CPF_PATTERN.matcher(customer.getCpf()).matches()) {
+            throw new IllegalArgumentException("CPF must contain exactly 11 digits.");
         }
         if (customer.getEmail() == null || !EMAIL_PATTERN.matcher(customer.getEmail()).matches()) {
             throw new IllegalArgumentException("Formato de email inválido.");
