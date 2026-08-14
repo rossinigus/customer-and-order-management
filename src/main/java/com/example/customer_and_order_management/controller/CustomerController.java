@@ -13,6 +13,30 @@ import java.util.List;
 @RequestMapping("/customers")
 public class CustomerController     {
 
+/*   TODO: Sugestão: podemos utilizar o Jakarta Bean Validation para validar os dados recebidos antes de encaminhá-los ao service.
+
+    Basta adicionar @Valid antes do @RequestBody:
+
+   import jakarta.validation.Valid;
+
+    @PostMapping
+    public ResponseEntity<Customer> create(
+            @Valid @RequestBody Customer customer) {
+
+        Customer created = customerService.create(customer);
+        return ResponseEntity.status(201).body(created);
+    }
+
+    As regras devem ser declaradas no modelo Customer, por exemplo:
+    public class Customer {
+    @NotBlank(message = "O nome é obrigatório")
+    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
+    private String name;
+
+    etc...etc..
+
+    */
+
     @Autowired
     private CustomerService customerService;
 
@@ -32,6 +56,7 @@ public class CustomerController     {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
+    //TODO: o que acha de criar também o caso de Patch para treinarmos a diferença entre eles?
     @PutMapping("/{id}")
     public ResponseEntity<Customer> update(@PathVariable Long id, @RequestBody Customer customer) {
         return ResponseEntity.ok(customerService.update(id, customer));

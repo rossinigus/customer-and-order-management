@@ -34,9 +34,11 @@ public class OrderService {
     public Order findById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Pedido não encontrado."));
+        // TODO: Este não seria o tipo de exception mais correta para este erro.
     }
 
     public Order update (Long id, Order updatedData) {
+        //TODO: considerar os mesmos comentários do outro service para este aqui também
         Order existing = findById(id);
         validate(updatedData);
 

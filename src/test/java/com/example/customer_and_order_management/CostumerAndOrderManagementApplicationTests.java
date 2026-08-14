@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class CostumerAndOrderManagementApplicationTests {
-
+	// TODO: exercitar os testes com jUnit...
 	@Test
 	void contextLoads() {
 	}
